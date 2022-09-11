@@ -1,2 +1,2 @@
-# python-battleship
+# Python Battleship
 A simple python battleship

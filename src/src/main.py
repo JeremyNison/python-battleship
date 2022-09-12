@@ -51,6 +51,10 @@ def main():
     #Initialization
     print(Colors.HEADER+"Enter board size (max 26) "+Colors.ENDC)
     size = int(input(">>> "))
+
+    if size < 2:
+        print(Colors.FAIL+"Board too small"+Colors.ENDC)
+        exit()
     
     #Checking max size
     if size > 26:
@@ -58,7 +62,15 @@ def main():
         exit()
 
     print(Colors.HEADER+"Enter number of ships"+Colors.ENDC)
-    nships = int(input(">>> "))
+    try:
+        nships = int(input(">>> "))
+    except:
+        print(Colors.FAIL+"Please enter a number."+Colors.ENDC)
+        exit()
+
+    if nships < 1:
+        print(Colors.FAIL+"Number of ship must be positive"+Colors.ENDC)
+        exit()
 
     #Creating the board
     board = Board(size,size)
@@ -86,7 +98,11 @@ def main():
         x = position[0]
         y = position[1:]
 
-        position = Position(x, y)
+        try:
+            position = Position(x, y)
+        except:
+            print(Colors.FAIL+"Invalid input. Retry."+Colors.ENDC)
+            continue
 
         #Shooting
         try:

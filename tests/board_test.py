@@ -36,7 +36,8 @@ class board_test(unittest.TestCase):
         self.assertTrue(negativ_board.cells == [])
         self.assertTrue(negativ_board.totalLifePoints == 0)
         self.assertTrue(negativ_board.numberOfShips == 0)
-        
+
+    #Ship setting tests    
     
     #Testing that we can't set a ship vertically if the board is too small
     def test_setShipV1(self):
@@ -111,7 +112,7 @@ class board_test(unittest.TestCase):
 
         captured_output = io.StringIO()
         sys.stdout = captured_output
-
+        #TODO : add try / except: self.Fail(...)
         board.shoot(0,0)
         board.shoot(2,2)
 
@@ -157,6 +158,36 @@ class board_test(unittest.TestCase):
         sys.stdout = sys.__stdout__
 
         self.assertEqual(oracle, captured_output.getvalue())
+
+    #Life points and number of ships tests
+    def test_setShipIncreasesBoardLifePointsAndNumberOfShips(self):
+        board = Board(5,5)
+        self.assertEqual(0,board.getTotalLifePoints())
+        board.setShipH(Ship(3), Position('B',2))
+        self.assertEqual(3,board.getTotalLifePoints())
+        board.setShipV(Ship(2), Position('C',3))
+        self.assertEqual(5,board.getTotalLifePoints())
+
+    def test_shootingAShipDecreasesBoardLifePoints(self):
+        board = Board(5,5)
+        board.setShipV(Ship(2), Position('C',3))
+        board.shoot(2,3)
+        self.assertEqual(1,board.getTotalLifePoints())
+
+    def test_setShipIncreasesBoardNumberOfShips(self):
+        board = Board(5,5)
+        self.assertEqual(0,board.getNumberOfShips())
+        board.setShipH(Ship(3), Position('B',2))
+        self.assertEqual(1,board.getNumberOfShips())
+        board.setShipV(Ship(2), Position('C',3))
+        self.assertEqual(2,board.getNumberOfShips())
+
+    def test_sunkingAShipDecreasesBoardNumberOfShips(self):
+        board = Board(5,5)
+        board.setShipV(Ship(2), Position('C',3))
+        board.shoot(2,3)
+        board.shoot(2,4)
+        self.assertEqual(0,board.getNumberOfShips())
 
 if __name__ == '__main__':
     unittest.main()

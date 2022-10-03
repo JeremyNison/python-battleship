@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.append("../src/")
 from Ship import *
 
 class ShipTest(unittest.TestCase):

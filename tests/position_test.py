@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.append("../src/")
 from Position import *
 
 class positiontest(unittest.TestCase):

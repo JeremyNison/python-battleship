@@ -1,10 +1,11 @@
 import unittest
+import io, sys
+sys.path.append("../src/")
 from Board import *
 from Ship import *
 from Position import *
 from Result import *
 from Colors import *
-import io, sys
 
 #Useful macros
 s = " "+Colors.OKBLUE+"~"+Colors.ENDC
@@ -102,7 +103,7 @@ class board_test(unittest.TestCase):
         board.display()
         sys.stdout = sys.__stdout__ #Reset redirection
 
-        self.assertEquals(oracle, captured_output.getvalue())
+        self.assertEqual(oracle, captured_output.getvalue())
 
     def test_displayMissed(self):
         board = Board(3,3)

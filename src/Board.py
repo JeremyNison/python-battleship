@@ -33,7 +33,7 @@ class Board:
         try:
             #Check for room
             for i in range(y,y+ship.getLifePoints()):
-                row = self.cells[i]
+                row = self.cells[abs(i)]
                 cell = row[x]
                 if not cell.isEmpty():
                     #Cannot place ship, space already occupied
@@ -56,7 +56,7 @@ class Board:
             row = self.cells[y]
             #Check for room
             for i in range(x, x+ship.getLifePoints()):
-                cell = row[i]
+                cell = row[abs(i)]
                 if not cell.isEmpty():
                     return False
                 cells.append(cell)

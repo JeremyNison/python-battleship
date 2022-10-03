@@ -4,6 +4,8 @@
 class Position:
 
     def __init__(self, x, y):
+        if y < 0:
+            raise ValueError("y must be positive")
         if type(x) is str:
             #Converting the letter to a coordinate position
             self.x = ord(x) - ord('A')

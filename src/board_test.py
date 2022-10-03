@@ -93,8 +93,6 @@ class board_test(unittest.TestCase):
             self.fail("shoot(0,1) shouldn't raise an exception")
 
     #Display Test
-    #TODO : display non reveal, display shoot (MISSED | HIT/SUNK), display reveal 
-
     def test_display(self):
         board = Board(3,3)
         oracle = "  | A B C\n---------\n0 |"+s+s+s+"\n1 |"+s+s+s+"\n2 |"+s+s+s+"\n"

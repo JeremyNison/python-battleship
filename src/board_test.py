@@ -13,17 +13,32 @@ class board_test(unittest.TestCase):
     #TODO
     
     #Testing that we can't set a ship vertically if the board is too small
-    def test_setShipV(self):
+    def test_setShipV1(self):
         board = Board(10,0) 
-        ship = Ship(5)
+        ship = Ship(3)
         position = Position('A', 4)
         self.assertFalse(board.setShipV(ship,position))
         
+    #Testing that we can't set a ship vertically at a position out of the board
+    def test_setShipV2(self):
+        board = Board(10,10) 
+        ship = Ship(3)
+        position = Position('D', 15)
+        self.assertFalse(board.setShipV(ship,position))
+        
+        
     #Testing that we can't set a ship horizontally if the board is too small
-    def test_setShipH(self):
+    def test_setShipH1(self):
         board = Board(0,10) 
         ship = Ship(5)
         position = Position('B', 3)
+        self.assertFalse(board.setShipH(ship,position))
+        
+    #Testing that we can't set a ship horizontally at a position out of board
+    def test_setShipH2(self):
+        board = Board(10,10) 
+        ship = Ship(5)
+        position = Position('B', 16)
         self.assertFalse(board.setShipH(ship,position))
 
     #ShootTest

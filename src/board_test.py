@@ -1,4 +1,3 @@
-from turtle import position
 import unittest
 from Board import *
 from Ship import *
@@ -6,6 +5,12 @@ from Position import *
 from Result import *
 from Colors import *
 import io, sys
+
+#Useful macros
+s = " "+Colors.OKBLUE+"~"+Colors.ENDC
+m = " "+Colors.WARNING+"x"+Colors.ENDC
+h = " "+Colors.FAIL+"H"+Colors.ENDC
+b = " "+Colors.OKGREEN+"B"+Colors.ENDC
 
 class board_test(unittest.TestCase):
 
@@ -25,7 +30,6 @@ class board_test(unittest.TestCase):
         ship = Ship(3)
         position = Position('D', 15)
         self.assertFalse(board.setShipV(ship,position))
-        
         
     #Testing that we can't set a ship horizontally if the board is too small
     def test_setShipH1(self):
@@ -72,9 +76,9 @@ class board_test(unittest.TestCase):
     #TODO : display non reveal, display shoot (MISSED | HIT/SUNK), display reveal 
 
     def test_display(self):
-        s = " "+Colors.OKBLUE+"~"+Colors.ENDC
         board = Board(3,3)
         oracle = "  | A B C\n---------\n0 |"+s+s+s+"\n1 |"+s+s+s+"\n2 |"+s+s+s+"\n"
+
         captured_output = io.StringIO()
         sys.stdout = captured_output #redirect std output
         board.display()
@@ -83,13 +87,57 @@ class board_test(unittest.TestCase):
         self.assertEquals(oracle, captured_output.getvalue())
 
     def test_displayMissed(self):
-        pass
+        board = Board(3,3)
+        oracle = "  | A B C\n---------\n0 |"+m+s+s+"\n1 |"+s+s+s+"\n2 |"+s+s+m+"\n"
+
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        board.shoot(0,0)
+        board.shoot(2,2)
+
+        board.display()
+        sys.stdout = sys.__stdout__
+
+        self.assertEqual(oracle, captured_output.getvalue())
 
     def test_displayHit(self):
-        pass
+        board = Board(3,3)
+        oracle = "  | A B C\n---------\n0 |"+s+h+s+"\n1 |"+s+s+s+"\n2 |"+s+s+s+"\n"
+
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        board.setShipH(Ship(2),Position('B',0))
+        board.shoot(1,0)
+
+        board.display() 
+        self.assertEqual(oracle, captured_output.getvalue())
+
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        oracle = "  | A B C\n---------\n0 |"+s+h+h+"\n1 |"+s+s+s+"\n2 |"+s+s+s+"\n"
+        board.shoot(2,0)
+
+        board.display()
+        sys.stdout = sys.__stdout__
+
+        self.assertEqual(oracle, captured_output.getvalue())
 
     def test_displayReveal(self):
-        pass
+        board = Board(3,3)
+        oracle = "  | A B C\n---------\n0 |"+s+s+s+"\n1 |"+b+b+b+"\n2 |"+s+s+s+"\n"
+
+        board.setShipH(Ship(3),Position('A',1))
+
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        board.display(True)
+        sys.stdout = sys.__stdout__
+
+        self.assertEqual(oracle, captured_output.getvalue())
 
 if __name__ == '__main__':
     unittest.main()

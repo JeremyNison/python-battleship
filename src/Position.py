@@ -4,9 +4,9 @@
 class Position:
 
     def __init__(self, x, y):
-        if y < 0:
+        if type(y) is int and y < 0:
             raise ValueError("y must be positive")
-        if x < 0:
+        if type(x) is int and x < 0:
             raise ValueError("x must be positive")
         
         if type(x) is str:

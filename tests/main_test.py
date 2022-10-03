@@ -1,7 +1,9 @@
 import unittest
+from unittest.mock import patch
 import sys
 sys.path.append("../src/")
 from main import *
+from Colors import *
 
 class maintest(unittest.TestCase):
 
@@ -23,5 +25,22 @@ class maintest(unittest.TestCase):
         ship = generateRandomShip()
         self.assertIn(ship.getLifePoints(),[2,3,4,5])
 
+    #Main method tests
+    @patch("builtins.input") #Mocking user input
+    def test_mainDoesNotAcceptsSizeSmallerThanTwo(self, mocked_input):
+        mocked_input.side_effect = [1] #User inputs 1
+        #Asserts that the main() method calls exit()
+        self.assertRaises(SystemExit, lambda: main())
+    
+    @patch("builtins.input")
+    def test_mainDoesNotAcceptsSizeGreaterThan26(self, mocked_input):
+        mocked_input.side_effect = [42]
+        self.assertRaises(SystemExit, lambda: main())
+
+    @patch("builtins.input")
+    def test_mainDoesNotAcceptsANegativeNumberOfShips(self, mocked_input):
+        mocked_input.side_effect = [10, -3] #10 = board size, -3 = number of ships
+        self.assertRaises(SystemExit, lambda: main())
+        
 if __name__ == '__main__':
     unittest.main()

@@ -10,7 +10,27 @@ import io, sys
 class board_test(unittest.TestCase):
 
     #Test constructor
-    #TODO
+    def test_init(self):
+        rows = 10
+        columns = 10 
+        board = Board(rows,columns)
+        self.assertTrue(board.rows == rows)
+        self.assertTrue(board.columns == columns)
+        self.assertFalse(board.cells == [])
+        self.assertTrue(board.totalLifePoints == 0)
+        self.assertTrue(board.numberOfShips == 0)
+    
+    #Testing that we can't create a board with negative rows and columns
+    def test_negativ_init(self):
+        negativ_rows = -10
+        negativ_columns = -10
+        negativ_board = Board(negativ_rows,negativ_columns)
+        self.assertTrue(negativ_board.rows == negativ_rows)
+        self.assertTrue(negativ_board.columns == negativ_columns)
+        self.assertTrue(negativ_board.cells == [])
+        self.assertTrue(negativ_board.totalLifePoints == 0)
+        self.assertTrue(negativ_board.numberOfShips == 0)
+        
     
     #Testing that we can't set a ship vertically if the board is too small
     def test_setShipV1(self):
@@ -34,7 +54,7 @@ class board_test(unittest.TestCase):
         position = Position('B', 3)
         self.assertFalse(board.setShipH(ship,position))
         
-    #Testing that we can't set a ship horizontally at a position out of board
+    #Testing that we can't set a ship horizontally at a position out of the board
     def test_setShipH2(self):
         board = Board(10,10) 
         ship = Ship(5)

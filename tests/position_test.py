@@ -3,7 +3,7 @@ import sys
 sys.path.append("../src/")
 from Position import *
 
-class positiontest(unittest.TestCase):
+class position_test(unittest.TestCase):
 
     def test_PositionCreationIsOk(self):
         pos = Position(2,2)

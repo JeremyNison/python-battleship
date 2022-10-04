@@ -33,19 +33,22 @@ def randomPopulate(board, nships, maxTry = 10000):
     
 #Generates a random position within the board
 def generateRandomPosition(xmax, ymax):
+    if xmax < 1 or ymax < 1:
+        raise ValueError("Boundaries must be positive.")
     x = random.randrange(0,xmax)
     y = random.randrange(0,ymax)
 
     return Position(x,y)
     
 #Generates a random ship
-def generateRandomShip():
-    sizePool = [2,2,3,3,3,3,4,4,5] #Pool of different ship sizes
-    sizeIndex = random.randrange(0,len(sizePool))
-    random.shuffle(sizePool)
+def generateRandomShip(size_pool = []):
+    if not size_pool: #Given size pool is empty
+         size_pool = [2,2,3,3,3,3,4,4,5] #Pool of different ship sizes
+    sizeIndex = random.randrange(0,len(size_pool))
+    random.shuffle(size_pool)
 
     #Picking a random size and generating a ship
-    return Ship(sizePool[sizeIndex])
+    return Ship(size_pool[sizeIndex])
 
 def main():
     #Initialization

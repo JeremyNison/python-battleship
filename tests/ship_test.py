@@ -3,7 +3,7 @@ import sys
 sys.path.append("../src/")
 from Ship import *
 
-class ShipTest(unittest.TestCase):
+class ship_test(unittest.TestCase):
     
     def test_getLifePoints(self):
         ship = Ship(2)

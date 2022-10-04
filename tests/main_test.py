@@ -1,29 +1,37 @@
 import unittest
 from unittest.mock import patch
 import sys
+from random import randrange, sample
 sys.path.append("../src/")
 from main import *
 from Colors import *
 
-class maintest(unittest.TestCase):
+class main_test(unittest.TestCase):
 
-    def test_generateRandomPositionIsOk(self):
-        xmax = 100
-        ymax = 100
-        x,y = generateRandomPosition(100,100).getX(),  generateRandomPosition(100,100).getY()
-        self.assertTrue(0 <= x <= 100)
-        self.assertTrue(0 <= y <= 100)
+    def test_generateRandomPosition(self):
+        #Generating a position with two random boundaries 100000 times
+        for _ in range(100000):
+            xmax = randrange(1,10000)
+            ymax = randrange(1,10000)
+            position = generateRandomPosition(xmax, ymax)
+            self.assertTrue(0 <= position.getX() <= xmax)
+            self.assertTrue(0 <= position.getY() <= ymax)
     
     def test_generateRandomPositionRaisedAnException(self):
-        self.assertRaises(ValueError, lambda: generateRandomPosition(-5,-5))
+        self.assertRaises(ValueError, lambda: generateRandomPosition(1,-3))
+        self.assertRaises(ValueError, lambda: generateRandomPosition(-2,6))
+        self.assertRaises(ValueError, lambda: generateRandomPosition(-5,-12))
+        self.assertRaises(ValueError, lambda: generateRandomPosition(0,0))
     
     def test_generateRandomShipisOk(self):
         ship = generateRandomShip()
         self.assertIsInstance(ship, Ship, "generateRandomShip is instance of Ship")
 
     def test_generateRandomShipInSizePool(self):
-        ship = generateRandomShip()
-        self.assertIn(ship.getLifePoints(),[2,3,4,5])
+        for _ in range(10000):
+            size_pool = sample(range(1, 100), randrange(1,50))
+            ship = generateRandomShip(size_pool)
+            self.assertIn(ship.getLifePoints(),size_pool)
 
     #Main method tests
     @patch("builtins.input") #Mocking user input

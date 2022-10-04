@@ -9,7 +9,14 @@
 - Jérémy Nison
 
 ## Usage : 
-voir README
+
+### Lancement et déroulement d'une partie : 
+Voir le [readme](README.md).
+
+### Tests
+Nos tests reposent sur le module standard [unittest](https://docs.python.org/3/library/unittest.html), permettant d'avoir accès à de nombreuses méthodes de tests, notamment des assertions.
+
+Pour lancer les tests d'une classe, placez vous dans le dossier `tests/` et executez la commande `python3 <nom_de_la_classe_de_tests>.py`
 
 ## Rapport :
 
@@ -18,7 +25,7 @@ Pour tester le projet, nous avons commencé par écrire les tests les plus simpl
 
 Nous devons également écrire des tests "end to end" en simulant dans des tests le déroulement d'une partie de A à Z afin de s'assurer que le jeu fonctionne correctement
 
-Nous avons pour objectif de mettre en place une ou deux techniques de testing avancées : *fuzzing* et *mutation testing*.
+Nous avons enfin pour objectif de mettre en place une ou deux techniques de testing avancées : *fuzzing* et *mutation testing*.
 
 ### Qu'est ce qui a été testé : 
 - Board : (`tests/board_test.py`) :

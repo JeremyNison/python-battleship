@@ -76,7 +76,6 @@ Nous avons enfin pour objectif de mettre en place une ou deux techniques de test
     - Tests des méthodes `shoot()` et `isSunk()`
 
 ### Ce qu'il reste à tester :
-- Cell (cell.py)
 - une partie du main (déroulement de la partie, try/excepts, ...)
 - main : random populate (placement aléatoire des bateaux dans une board)
 - main : vérifier que le jeu s'arrete quand il faut (board a 0 pv, reveal, ...)

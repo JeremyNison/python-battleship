@@ -82,7 +82,33 @@ Nous avons enfin pour objectif de mettre en place une ou deux techniques de test
 - position : améliorer les tests de la classe (tester avec str et int en input)
 
 ### Techniques de tests avancées utilisées :
-A venir ...
+
+Après avoir réalisé le plus de tests simples possible, nous avons décidé de mettre en place du mutation testing.  
+Pour cela, nous avons utilisé mutmut de python.
+
+Nous avons du réaliser une configuration qui se trouve dans `tests/setup.cfg` pour bien préciser comment run tous nos tests.  
+
+Mutmut avait généré 291 mutations en lui laissant utiliser tous les types de mutations.
+
+#### Lancement
+
+	cd tests
+	mutmut run
+
+#### Résultats
+
+Sur les 291 mutations, 144 ont survécus.  
+
+![Mutmut](mutmut.png)
+
+109 des mutations qui ont survécus viennent de `main.py` et de deux sources globales : 
+
+- la fonction `randomPopulate` qui n'est pas testée.
+- des changements sur la tailles de nos bâteau qui ne sont pas censés impacter notre application
+
+#### Continuité
+
+Nous avons donc essayé de travailler sur les autres mutation survivantes pour en réduire le nombres en ajoutant des tests sur les potentiels bugs de notre application.
 
 ### Bilan : 
 TODO (cette section n'est pas encore proprement rédigée)

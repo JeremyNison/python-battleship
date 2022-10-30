@@ -127,7 +127,10 @@ Après avoir réalisé des tests sur `randomPopulate` et certaines autres foncti
 
 L'écriture et le lancement des tests nous ont permis de détecter et de régler plusieurs problèmes dans le code source. Certaines fonctions ont du être modifiées afin de pouvoir être testés plus facilement.
 
+Voici quelques changements implémentés : 
+
 - La création d'une position avec des coordonnées négatives lève une exception.
 - La fonction `generateRandomPosition` lève une exception si les valeurs limites données en paramètre sont inférieures à 1
 - La fonction `generateRandomShip` peut accepter une liste d'int (size pool) en paramètre, afin de pouvoir générer des bateaux en utilisant une taille prise aléatoirement dans la liste.
 - catchs d'exceptions dans la fonction `main`
+- appel à `exit()` dans `main` lorsque la partie est gagnée.

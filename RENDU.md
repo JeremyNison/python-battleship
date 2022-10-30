@@ -58,22 +58,36 @@ Nous avons enfin pour objectif de mettre en place une ou deux techniques de test
     - Test de la génération de bateau aléatoire (méthode `generateRandomShip()`): 
         - Test pour vérifier que les points de vie du bateau sont dans la size pool : 
             - Génération aléatoire d'une pool de sizes et d'un bateau(test répété 10000 fois)
+    - Test du remplissage aléatoire de la board (méthode `randomPopulate()`):
+        - Test pour vérifier que la méthode génère le bon nombre de bateaux
+        - Test pour vérifier que la méthode appelle `exit()`si un bateau ne peut pas être placé (plus de place sur la board, ...)
     - Test de la méthode `main()` : 
         - Test avec une taille de Board incorrecte (négative ou nulle)
         - Test avec un nombre de bateaux incorrect (négatif ou nul)
+        - Test avec des valeurs incorrectes(str à la place d'int, ...)
 
         *La méthode `main()` se base sur des valeurs entrées par l'utilisateur pour générer une Board de la taille donnée et y placer le nombre de bateaux entré par l'utilisateur. Afin de simuler l'entrée de données par un utilisateur, nous avons mocké l'entrée standard de python avec la l'annotation `@patch("builtins.input")`. On peut ensuite définir une liste de valeurs qui seront appelées dans l'ordre à chaque fois que l'execution de la méthode nécessite une valeur trouvée sur l'entrée standard.*
 
-- Position (`tests/Position.py`) :
+- Position (`tests/position_test.py`) :
     - Test du constructeur :
         - Test avec des valeurs correctes
         - Test du levage de l'exception lorsque des valeurs négatives sont passées
+        - Test avec des valeur de la forme lettre+nomnbre (A1, B3, ...)
     - Tests unitaires des getters
     - Test unitaire de la méthode `toString()`
 
 - Ship (`tests/ship_test.py`) :
     - Test du constructeur & de la méthode `getLifePoints()`
     - Tests des méthodes `shoot()` et `isSunk()`
+
+- Cell (`tests/cell_test.py`):
+    - Test du constructeur
+    - Test de `setShip()` et `isEmpty()`
+    - Tests de la mtthode `shoot()`:
+        - Test pour vérifier que  l'appel a `shoot()` passe l'arrribut `shot` de la cell de False à True
+        - Test des différentes valeurs de retour en fonction de l'état de la cellule (MISSED, HIT, ...)
+    - Tests de `toString()` : 
+        - Tests pour vérifier que la str retournée correspond bien à l'état de la cellule
 
 ### Techniques de tests avancées utilisées :
 

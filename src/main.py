@@ -53,7 +53,11 @@ def generateRandomShip(size_pool = []):
 def main():
     #Initialization
     print(Colors.HEADER+"Enter board size (max 26) "+Colors.ENDC)
-    size = int(input(">>> "))
+    try:
+        size = int(input(">>> "))
+    except:
+        print(Colors.FAIL+"Please enter a correct size."+Colors.ENDC)
+        exit()
 
     if size < 2:
         print(Colors.FAIL+"Board too small"+Colors.ENDC)
@@ -64,7 +68,7 @@ def main():
         print(Colors.FAIL+"Grid too fat."+Colors.ENDC)
         exit()
 
-    print(Colors.HEADER+"Enter number of ships"+Colors.ENDC)
+    print(Colors.HEADER+"Enter number of ships."+Colors.ENDC)
     try:
         nships = int(input(">>> "))
     except:
@@ -72,11 +76,11 @@ def main():
         exit()
 
     if nships < 1:
-        print(Colors.FAIL+"Number of ship must be positive"+Colors.ENDC)
+        print(Colors.FAIL+"Number of ship must be positive."+Colors.ENDC)
         exit()
 
     #Creating the board
-    board = Board(size,size)
+    board = Board(size,size)       
 
     #Creating and placing the ships
     randomPopulate(board, nships)
@@ -126,6 +130,7 @@ def main():
 
     #No lifepoints : end of the game
     print(Colors.OKGREEN+"Well played, you win !"+Colors.ENDC)
+    exit()
 
 if __name__ == '__main__':
     main()

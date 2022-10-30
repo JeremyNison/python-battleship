@@ -75,12 +75,6 @@ Nous avons enfin pour objectif de mettre en place une ou deux techniques de test
     - Test du constructeur & de la méthode `getLifePoints()`
     - Tests des méthodes `shoot()` et `isSunk()`
 
-### Ce qu'il reste à tester :
-- une partie du main (déroulement de la partie, try/excepts, ...)
-- main : random populate (placement aléatoire des bateaux dans une board)
-- main : vérifier que le jeu s'arrete quand il faut (board a 0 pv, reveal, ...)
-- position : améliorer les tests de la classe (tester avec str et int en input)
-
 ### Techniques de tests avancées utilisées :
 
 Après avoir réalisé le plus de tests simples possible, nous avons décidé de mettre en place du mutation testing.  
@@ -111,8 +105,10 @@ Sur les 291 mutations, 144 ont survécus.
 Nous avons donc essayé de travailler sur les autres mutation survivantes pour en réduire le nombres en ajoutant des tests sur les potentiels bugs de notre application.
 
 ### Bilan : 
-TODO (cette section n'est pas encore proprement rédigée)
-- Refactor potision pour throw une Exception si params < 0
-- Refactor generateRandomPosition pour throw une exception si boundaries < 1
-- Refactor generateRandomShip pour accepter une size pool en param (list d'int)
-- TODO : refactor main pour checker type input (catch ValueError)
+
+L'écriture et le lancement des tests nous ont permis de détecter et de régler plusieurs problèmes dans le code source. Certaines fonctions ont du être modifiées afin de pouvoir être testés plus facilement.
+
+- La création d'une position avec des coordonnées négatives lève une exception.
+- La fonction `generateRandomPosition` lève une exception si les valeurs limites données en paramètre sont inférieures à 1
+- La fonction `generateRandomShip` peut accepter une liste d'int (size pool) en paramètre, afin de pouvoir générer des bateaux en utilisant une taille prise aléatoirement dans la liste.
+- catchs d'exceptions dans la fonction `main`

@@ -27,5 +27,9 @@ class position_test(unittest.TestCase):
         pos = Position(2,2)
         self.assertEqual(pos.toString(),"C2")
 
+    def test_createPositionWithLetterAndInt(self):
+        pos = Position("A", 3)
+        self.assertEqual("A3", pos.toString())
+
 if __name__ == '__main__':
     unittest.main()

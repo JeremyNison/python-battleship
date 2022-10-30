@@ -109,14 +109,19 @@ Sur les 291 mutations, 144 ont survécus.
 
 ![Mutmut](mutmut.png)
 
-109 des mutations qui ont survécus viennent de `main.py` et de deux sources globales : 
+Les 109 mutations qui ont survécus viennent de `main.py` et de globalement trois sources : 
 
 - la fonction `randomPopulate` qui n'est pas testée.
 - des changements sur la tailles de nos bâteau qui ne sont pas censés impacter notre application
+- les tests manquants
 
 #### Continuité
 
 Nous avons donc essayé de travailler sur les autres mutation survivantes pour en réduire le nombres en ajoutant des tests sur les potentiels bugs de notre application.
+
+Après avoir réalisé des tests sur `randomPopulate` et certaines autres fonctions, nous avons réussi à tuer 50 survivants.
+
+![Mutmut](mutmut2.png)
 
 ### Bilan : 
 
